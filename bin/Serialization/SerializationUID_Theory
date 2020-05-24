@@ -1,0 +1,18 @@
+Key Point
+
+1. 	Serial version UID is used for the versioning of the serialized streams during serialization process Serial version UID 
+   	is also stored.
+   	during deserialization generated version UID is matched with the stored one, and if there is missmatch process gets failed.
+   
+2.  Serial version UID is a 64 bits hash of the class name 'interface name' method and field so basically thats the combination 
+	of this all those stuff.
+	if you dont decleared your one yourself serialization process will still generate serial version UID in that case 
+	it will fail for any changes in the class that we have seen.
+
+3. if you declared Serial version UID that give you control over the versioning when you think class has grown in a way
+	that is not compatible with the previous version then you can change the serial version UID , 
+	if you think change in the class are not not significant enough to change the serial version UID you may choose to retain the 
+	same serial version UID, in that case serialization and deserialization will not failed even if your class had been changed .
+	
+4. Serial version UID is declared as private static final long and it is always better to declared one in order 
+   to have control over the versioning of the class.
